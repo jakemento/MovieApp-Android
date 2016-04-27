@@ -4,20 +4,29 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ResultsActivity extends AppCompatActivity {
+    public ArrayList<Movie> mMovies = new ArrayList<>();
     public static final String TAG = ResultsActivity.class.getSimpleName();
+    @Bind(R.id.listView)
+    ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         String movieName = intent.getStringExtra("movieName");
@@ -32,16 +41,26 @@ public class ResultsActivity extends AppCompatActivity {
                 e.printStackTrace();
 
             }
+
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    if (response.isSuccessful()) {
-                        Log.v(TAG, "shiznit"+jsonData);
+            public void onResponse(Call call, Response response) {
+                mMovies = MovieService.processResults(response);
+                ResultsActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] movieNames = new String[mMovies.size()];
+                        for (int i = 0; i < movieNames.length; i++) {
+                            movieNames[i] = mMovies.get(i).getMovieName();
+                        }
+                        ArrayAdapter adapter = new ArrayAdapter(ResultsActivity.this, android.R.layout.simple_list_item_1, movieNames);
+                        mListView.setAdapter(adapter);
+
+                        for (Movie movie : mMovies) {
+                            Log.d(TAG, "Title " + movie.getMovieName());
+                        }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                });
+
             }
         });
     }
