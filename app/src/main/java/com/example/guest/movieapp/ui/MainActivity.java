@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String movieName = mMovieSearchEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ResultsListActivity.class);
                 intent.putExtra("movieName", movieName);
                 startActivity(intent);
             }

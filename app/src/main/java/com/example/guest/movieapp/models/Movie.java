@@ -6,14 +6,16 @@ public class Movie {
     private String mMovieName;
     private String mMovieImage;
     private String mMovieDescription;
-    private double mMovieRating;
+    private String mMovieRating;
+    private String mReleaseDate;
 
-    public Movie(String movieName, String movieImage, String movieDescription, double movieRating) {
+    public Movie(String movieName, String movieImage, String movieDescription, String movieRating, String releaseDate) {
 
         this.mMovieName = movieName;
-        this.mMovieImage = movieImage;
+        this.mMovieImage = "http://image.tmdb.org/t/p/w500/" +movieImage;
         this.mMovieDescription = movieDescription;
         this.mMovieRating = movieRating;
+        this.mReleaseDate = releaseDate;
     }
 
     public String getMovieName() {
@@ -31,7 +33,11 @@ public class Movie {
         return mMovieDescription;
     }
 
-    public double getMovieRating() {
+    public String getReleaseDate() {
+        return mReleaseDate;
+    }
+
+    public String getMovieRating() {
         return mMovieRating;
     }
 }

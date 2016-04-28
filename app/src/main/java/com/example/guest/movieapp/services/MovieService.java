@@ -1,6 +1,5 @@
 package com.example.guest.movieapp.services;
 
-import android.media.Image;
 import android.util.Log;
 
 import com.example.guest.movieapp.Constants;
@@ -54,11 +53,12 @@ public class MovieService {
                     JSONObject filmJSON = moviesJSON.getJSONObject(i);
                     String name = filmJSON.getString("title");
                     String image = filmJSON.getString("poster_path");
-                    double rating = filmJSON.getDouble("vote_average");
+                    String rating = filmJSON.getString("vote_average");
                     String description = filmJSON.getString("overview");
+                    String releaseDate = filmJSON.getString("release_date");
 
 
-                    Movie movie = new Movie(name, image, description, rating);
+                    Movie movie = new Movie(name, image, description, rating, releaseDate);
                     movies.add(movie);
 
                 }
