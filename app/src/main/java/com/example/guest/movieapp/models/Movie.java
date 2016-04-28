@@ -1,13 +1,16 @@
 package com.example.guest.movieapp.models;
 
-import android.media.Image;
+import org.parceler.Parcel;
 
+@Parcel
 public class Movie {
     private String mMovieName;
     private String mMovieImage;
     private String mMovieDescription;
     private String mMovieRating;
     private String mReleaseDate;
+
+    public Movie() {}
 
     public Movie(String movieName, String movieImage, String movieDescription, String movieRating, String releaseDate) {
 

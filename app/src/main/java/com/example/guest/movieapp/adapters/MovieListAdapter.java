@@ -13,7 +13,11 @@ import android.widget.TextView;
 
 import com.example.guest.movieapp.R;
 import com.example.guest.movieapp.models.Movie;
+import com.example.guest.movieapp.ui.MovieDetailActivity;
+import com.example.guest.movieapp.ui.ResultsListActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -47,28 +51,38 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     public int getItemCount() {
         return mMovies.size();
     }
+
+
     public class MovieViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.movieImageView) ImageView mMovieImageView;
         @Bind(R.id.movieNameTextView) TextView mNameTextView;
-        @Bind(R.id.descriptionTextView) TextView mDescriptionTextView;
+//        @Bind(R.id.descriptionTextView) TextView mDescriptionTextView;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
         @Bind(R.id.releaseDateTextView) TextView mReleaseDate;
         private Context mContext;
 
         public MovieViewHolder (View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int itemPosition = getLayoutPosition();
+                    Intent intent = new Intent (mContext, MovieDetailActivity.class);
+                    intent.putExtra("position", itemPosition + "");
+                    intent.putExtra("movies", Parcels.wrap(mMovies));
+                    mContext.startActivity(intent);
+                }
+            });
         }
+
         public void bindMovie(Movie movie) {
+            Picasso.with(mContext).load(movie.getMovieImage()).into(mMovieImageView);
             mNameTextView.setText(movie.getMovieName());
 //            mDescriptionTextView.setText(movie.getMovieDescription());
-            mReleaseDate.setText(movie.getReleaseDate());
             mRatingTextView.setText(movie.getMovieRating());
-
-            Picasso.with(mContext).load(movie.getMovieImage()).into(mMovieImageView);
-
+            mReleaseDate.setText(movie.getReleaseDate());
         }
     }
-
 }
