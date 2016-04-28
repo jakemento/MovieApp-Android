@@ -1,4 +1,4 @@
-package com.example.guest.movieapp;
+package com.example.guest.movieapp.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.guest.movieapp.services.MovieService;
+import com.example.guest.movieapp.R;
+import com.example.guest.movieapp.models.Movie;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.guest.movieapp;
+package com.example.guest.movieapp.models;
 
 public class Movie {
     private String mMovieName;
