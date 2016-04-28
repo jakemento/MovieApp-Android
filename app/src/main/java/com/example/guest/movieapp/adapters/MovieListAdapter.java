@@ -60,6 +60,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         }
         public void bindMovie(Movie movie) {
             mNameTextView.setText(movie.getMovieName());
+
         }
     }
 

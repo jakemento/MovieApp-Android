@@ -23,8 +23,6 @@ import okhttp3.Response;
 public class ResultsActivity extends AppCompatActivity {
     public ArrayList<Movie> mMovies = new ArrayList<>();
     public static final String TAG = ResultsActivity.class.getSimpleName();
-    @Bind(R.id.listView)
-    ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
